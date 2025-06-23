@@ -1,0 +1,139 @@
+<!-- Navbar Component (Dán vào file base.html) -->
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+    
+    body {
+        font-family: 'Poppins', sans-serif;
+    }
+    
+    .navbar.navbar-dark {
+        background: linear-gradient(90deg, #1d2b64 0%, #2c3e50 100%);
+        padding: 10px 0;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        transition: background 0.3s ease;
+    }
+    
+    .logo-container {
+        display: flex;
+        align-items: center;
+    }
+    
+    .logo {
+        height: 45px;
+        margin-right: 12px;
+        transition: transform 0.3s ease;
+    }
+    
+    .navbar-brand:hover .logo {
+        transform: rotate(-10deg) scale(1.1);
+    }
+    
+    .logo-text {
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: #ffffff;
+        letter-spacing: 1px;
+    }
+    
+    .navbar-nav .nav-link {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 1rem;
+        font-weight: 500;
+        padding: 8px 18px;
+        border-radius: 8px;
+        margin: 0 5px;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+    }
+    
+    .navbar-nav .nav-link:hover {
+        color: #ffffff;
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .navbar-nav .nav-link.active {
+        color: #ffffff;
+        background-color: rgba(0, 123, 255, 0.5);
+        font-weight: 600;
+    }
+    
+    .nav-link i.fas {
+        transition: transform 0.3s ease;
+        margin-right: 8px;
+    }
+    
+    .nav-link:hover i.fas {
+        transform: scale(1.2);
+    }
+    
+    .navbar-toggler {
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+    
+    .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+    </style>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('index') }}">
+                <div class="logo-container">
+                    <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="Logo Trường" class="logo">
+                    <span class="logo-text">Hệ thống ký văn bằng UIT</span>
+                </div>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                     {% if current_user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('index') }}"><i class="fas fa-home"></i>Trang chủ</a>
+                        </li>
+                         <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('ds_sinh_vien') }}"><i class="fas fa-users"></i>Sinh viên</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('key_generator') }}"><i class="fas fa-key"></i>Tạo Khóa</a>
+                        </li>
+                    {% endif %}
+                </ul>
+                
+                <ul class="navbar-nav ms-auto">
+                     {% if current_user.is_authenticated %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-user-circle"></i>{{ current_user.username }}
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">Hồ sơ</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ url_for('logout') }}">
+                                        <i class="fas fa-sign-out-alt"></i>Đăng xuất
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('login') }}">
+                                <i class="fas fa-sign-in-alt"></i>Đăng nhập
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-primary ms-2" href="{{ url_for('register') }}">
+                                Đăng ký
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    

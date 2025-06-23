@@ -1,0 +1,36 @@
+<!-- templates/setup_2fa.html -->
+{% extends "base.html" %}
+{% block title %}Kích hoạt Xác thực hai yếu tố{% endblock %}
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-8 col-lg-7">
+        <div class="card shadow-lg text-center">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0"><i class="fas fa-qrcode"></i> Kích hoạt tài khoản (Bước 1/2)</h3>
+            </div>
+            <div class="card-body p-4">
+                <p class="lead">Đây là lần đăng nhập đầu tiên. Để bảo mật tài khoản, vui lòng quét mã QR này bằng ứng dụng xác thực của bạn (Google Authenticator, Authy, v.v.).</p>
+                <div class="my-4 d-flex justify-content-center">
+                    <img src="data:image/png;base64,{{ qr_code_data }}" alt="QR Code">
+                </div>
+                <hr>
+                <h4 class="mt-4">Xác minh (Bước 2/2)</h4>
+                <p>Sau khi quét, nhập mã 6 số hiển thị trên ứng dụng của bạn vào ô dưới đây để hoàn tất kích hoạt.</p>
+                <form method="POST" class="mt-3 d-inline-block">
+                    <div class="mb-3">
+                        <input type="text" class="form-control form-control-lg text-center" 
+                               id="token" name="token" required 
+                               maxlength="6" pattern="\d{6}" 
+                               inputmode="numeric" 
+                               placeholder="------"
+                               style="letter-spacing: 0.5em; width: 200px; margin: auto;">
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-success btn-lg">Kích hoạt và Đăng nhập</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

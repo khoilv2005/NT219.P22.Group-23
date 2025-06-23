@@ -1,0 +1,32 @@
+<!-- templates/verify_2fa.html -->
+{% extends "base.html" %}
+{% block title %}Xác minh 2FA{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-6 col-lg-5">
+        <div class="card shadow-lg">
+            <div class="card-header text-center bg-primary text-white">
+                <h3 class="mb-0"><i class="fas fa-shield-alt"></i> Xác minh danh tính</h3>
+            </div>
+            <div class="card-body p-4">
+                <p class="text-center">Nhập mã gồm 6 chữ số từ ứng dụng xác thực của bạn.</p>
+                <form method="POST" action="{{ url_for('verify_2fa') }}">
+                    <div class="mb-3">
+                        <label for="token" class="form-label fw-bold">Mã xác thực</label>
+                        <input type="text" class="form-control form-control-lg text-center" 
+                               id="token" name="token" required 
+                               maxlength="6" pattern="\d{6}" 
+                               inputmode="numeric" 
+                               placeholder="------"
+                               style="letter-spacing: 0.5em;">
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg">Xác minh</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

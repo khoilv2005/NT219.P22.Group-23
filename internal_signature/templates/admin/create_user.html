@@ -1,0 +1,39 @@
+<!-- templates/admin/create_user.html -->
+{% extends "base.html" %}
+{% block title %}Tạo người dùng mới{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Tạo tài khoản người dùng mới</h2>
+    <hr>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <form method="POST" action="{{ url_for('create_user') }}">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Tên đăng nhập</label>
+                            <input type="text" class="form-control" id="username" name="username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="full_name" class="form-label">Họ và Tên</label>
+                            <input type="text" class="form-control" id="full_name" name="full_name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Mật khẩu (Tạm thời)</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="role" class="form-label">Vai trò</label>
+                            <select class="form-select" id="role" name="role" required>
+                                <option value="nhanvien">Nhân viên</option>
+                                <option value="hieutruong">Hiệu trưởng</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Tạo tài khoản</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

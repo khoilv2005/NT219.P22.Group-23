@@ -1,0 +1,124 @@
+<style>
+    /* --- Google Font & Bố cục chung --- */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+    html {
+        height: 100%;
+    }
+
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100%;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    main {
+        flex-grow: 1;
+    }
+
+    /* --- Tùy chỉnh Footer nhỏ gọn --- */
+    .footer {
+        background-color: #2c3e50;
+        color: rgba(255, 255, 255, 0.8);
+        padding: 25px 0 12px 0;
+        margin-top: auto;
+        clip-path: polygon(0 5%, 100% 0, 100% 100%, 0% 100%);
+    }
+    .footer-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+    .footer-left, .footer-center, .footer-right {
+        flex: 1;
+        min-width: 180px;
+    }
+    .footer-logo {
+        max-height: 38px;
+        opacity: 0.9;
+    }
+    .footer-center h5 {
+        color: #ffffff;
+        font-weight: 600;
+        margin-bottom: 8px;
+        font-size: 1.05rem;
+        letter-spacing: 0.5px;
+    }
+    .footer-center p, .footer-right p {
+        font-size: 0.82rem;
+        line-height: 1.4;
+        margin-bottom: 4px;
+    }
+    .footer-right p i.fas {
+        width: 20px;
+    }
+    .footer-right p:last-child {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.77rem;
+        margin-top: 10px;
+    }
+    .footer hr {
+        border-color: rgba(255, 255, 255, 0.15);
+        border-width: 1px;
+        margin: 10px 0;
+    }
+    .footer .text-center small {
+        color: rgba(255, 255, 255, 0.6);
+        letter-spacing: 0.5px;
+        font-size: 0.78rem;
+    }
+    @media (max-width: 992px) {
+        .footer-content {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .footer-left, .footer-center, .footer-right {
+            width: 100%;
+            margin-bottom: 12px;
+        }
+        .footer-right {
+            margin-bottom: 0;
+        }
+        .footer {
+            clip-path: none;
+        }
+    }
+</style>
+
+<!-- Footer Component -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-left">
+                <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="Logo Trường" class="footer-logo">
+            </div>
+            <div class="footer-center">
+                <h5>Trường Đại học Công nghệ Thông tin</h5>
+                <p class="mb-1">Đại học Quốc gia TP.HCM</p>
+                <p class="mb-0">
+                    <i class="fas fa-map-marker-alt me-2"></i>
+                    Khu phố 6, Phường Linh Trung, Quận Thủ Đức, TP.HCM
+                </p>
+            </div>
+            <div class="footer-right">
+                <p class="mb-1">
+                    <i class="fas fa-phone me-2"></i>
+                    (028) 3725 2002
+                </p>
+                <p class="mb-1">
+                    <i class="fas fa-envelope me-2"></i>
+                    info@uit.edu.vn
+                </p>
+                <p class="mb-0">© {{ current_year }} Bản quyền thuộc về UIT</p>
+            </div>
+        </div>
+        <hr class="my-3" style="border-color: rgba(255,255,255,0.2);">
+        <div class="text-center">
+            <small>Hệ thống ký văn bằng số - Phiên bản 1.0</small>
+        </div>
+    </div>
+</footer>
