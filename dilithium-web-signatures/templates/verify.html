@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xác Thực Tài Liệu</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .flash {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .flash.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .flash.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .upload-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .upload-form input[type="file"] {
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .upload-form input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        .upload-form input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .results {
+            margin-top: 30px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+        .results h2 {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .results p {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #dee2e6;
+        }
+        .results .valid { color: #28a745; }
+        .results .invalid { color: #dc3545; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Xác Thực Tài Liệu</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="flash {{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="post" enctype="multipart/form-data" class="upload-form">
+        <label for="document">Chọn tài liệu để xác thực:</label>
+        <input type="file" name="document" id="document" required>
+        <input type="submit" value="Xác thực">
+    </form>
+
+    {% if verified %}
+    <div class="results">
+        <h2>Kết Quả Xác Thực</h2>
+        {% if valid %}
+            <h3 class="valid">TÀI LIỆU HỢP LỆ</h3>
+        {% else %}
+            <h3 class="invalid">TÀI LIỆU KHÔNG HỢP LỆ</h3>
+        {% endif %}
+        
+        <p><strong>Tên file:</strong> {{ filename | default('N/A') }}</p>
+        <p><strong>Kiểm tra nội dung (Hash):</strong> 
+            {% if hash_valid %}
+                <span class="valid">Hợp lệ</span>
+            {% else %}
+                <span class="invalid">Không hợp lệ</span>
+            {% endif %}
+        </p>
+        <p><strong>Kiểm tra chữ ký (Signature):</strong> 
+            {% if sig_valid %}
+                <span class="valid">Hợp lệ</span>
+            {% else %}
+                <span class="invalid">Không hợp lệ</span>
+            {% endif %}
+        </p>
+    </div>
+    {% endif %}
+</div>
+
+</body>
+</html>

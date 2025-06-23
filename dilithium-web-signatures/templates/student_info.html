@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông Tin Sinh Viên</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+        th {
+            width: 35%;
+            font-weight: 600;
+            color: #555;
+        }
+        tr:last-child th, tr:last-child td {
+            border-bottom: none;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Thông Tin Sinh Viên</h1>
+    {% if student %}
+    <table>
+        <tr>
+            <th>MSSV</th>
+            <td>{{ student.mssv }}</td>
+        </tr>
+        <tr>
+            <th>Họ và Tên</th>
+            <td>{{ student.ho_ten }}</td>
+        </tr>
+        <tr>
+            <th>Năm vào trường</th>
+            <td>{{ student.nam_vao_truong }}</td>
+        </tr>
+        <tr>
+            <th>Năm tốt nghiệp</th>
+            <td>{{ student.nam_tot_nghiep or 'Chưa tốt nghiệp' }}</td>
+        </tr>
+        <tr>
+            <th>Xếp loại</th>
+            <td>{{ student.xep_loai or 'Chưa có' }}</td>
+        </tr>
+        <tr>
+            <th>Trạng thái</th>
+            <td>{{ student.trang_thai }}</td>
+        </tr>
+    </table>
+    {% else %}
+    <p style="text-align:center;">Không tìm thấy thông tin cho sinh viên này.</p>
+    {% endif %}
+
+    <a href="{{ url_for('verify') }}" class="back-link">← Quay lại trang xác thực</a>
+</div>
+
+</body>
+</html>
